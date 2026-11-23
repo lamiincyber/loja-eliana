@@ -1,0 +1,16 @@
+const $=s=>document.querySelector(s);
+document.querySelectorAll('[data-i]').forEach(e=>e.src=IMG[e.dataset.i]);
+$('#lg').src=IMG.logo;$('#lg2').src=IMG.logo;
+document.querySelectorAll('[data-wa]').forEach(a=>a.href=WA);
+$('#rota').href=MAP;$('#rota2').href=MAP;
+const links=DATA.menu.map(([t,h])=>`<a href="${h}">${t}</a>`).join('');
+$('#nv').innerHTML=links+'<a class="btn p" target="_blank" rel="noopener" href="'+WA+'">WhatsApp</a>';
+$('#fn').innerHTML=links;
+$('#cats').innerHTML=DATA.cats.map(([t,i,c])=>i?`<div class="cat ${c||''}"><img src="${IMG[i]}" alt="${t}" loading="lazy"><span>${t}</span></div>`:`<div class="cat t"><span>${t}</span></div>`).join('');
+$('#ig').innerHTML=DATA.ig.map(i=>`<a href="https://www.instagram.com/loja_eliana/" target="_blank" rel="noopener" aria-label="Ver no Instagram"><img src="${IMG[i]}" alt="" loading="lazy"></a>`).join('');
+$('#dif').innerHTML=DATA.dif.map(([t,d,p])=>`<div><svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg><h3>${t}</h3><p>${d}</p></div>`).join('');
+const nv=$('#nv'),bg=$('.bg');
+bg.onclick=()=>{const o=nv.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
+nv.addEventListener('click',e=>{if(e.target.closest('a')){nv.classList.remove('open');bg.setAttribute('aria-expanded',false)}});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -4% 0px'});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
